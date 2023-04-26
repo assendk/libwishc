@@ -30,4 +30,24 @@ class LibrariesIoApi
 
         return json_decode($response->getBody(), true);
     }
+
+    public function getPackageDetails(string $platform, string $name)
+    {
+        // exmaple: https://libraries.io/api/github/gruntjs/grunt?api_key=083faf6705582803ac8e45d3bb802279
+//        $name = rawurlencode($name);
+//        $name = str_replace('/', '%2F', $name);
+        $response = $this->client->get("$platform/$name", [
+                'query' => [
+                    'api_key' => $this->apiKey
+                ],
+            ]
+        );
+
+        $query = $response->getRequestTarget();
+        echo "Query: $query\n";
+
+
+
+        return json_decode($response->getBody(), true);
+    }
 }
