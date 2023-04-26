@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+    <form action="{{ path('search') }}" method="post">
+        <input type="text" name="keyword" placeholder="Search keyword...">
+        <button type="submit">Search</button>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Repository URL</th>
+            <th>Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for result in results %}
+            <tr>
+                <td>{{ result.name }}</td>
+                <td>{{ result.repository_url }}</td>
+                <td><input type="checkbox" class="select-package" data-name="{{ result.name }}" data-url="{{ result.repository_url }}"></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    document.querySelectorAll('.select-package').forEach(function (checkbox) {
+        checkbox.addEventListener('click', function (event) {
+            const isChecked = event.target.checked;
+            const name = event.target.getAttribute('data
+            const url = event.target.getAttribute('data-url');
+
+            // Handle the checkbox click event here
+            if (isChecked) {
+                // Add the selected package to the user's list
+                addToUserList(name, url);
+            } else {
+                // Remove the selected package from the user's list
+                removeFromUserList(name, url);
+            }
+        });
+    });
+
+    function addToUserList(name, url) {
+        // Make an AJAX call to add the package to the user's list
+        // You can implement the endpoint in your Symfony controller
+        // Example using jQuery:
+        $.post('/add-package', {name: name, url: url}, function (response) {
+            // Handle the response here, e.g., show a message to the user
+        });
+    }
+
+    function removeFromUserList(name, url) {
+        // Make an AJAX call to remove the package from the user's list
+        // You can implement the endpoint in your Symfony controller
+        // Example using jQuery:
+        $.post('/remove-package', {name: name, url: url}, function (response) {
+            // Handle the response here, e.g., show a message to the user
+        });
+    }
+</script>
+{% endblock %}
