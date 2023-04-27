@@ -35,7 +35,8 @@ class LibrariesIoApi
     {
         // exmaple: https://libraries.io/api/github/gruntjs/grunt?api_key=083faf6705582803ac8e45d3bb802279
 //        $name = rawurlencode($name);
-//        $name = str_replace('/', '%2F', $name);
+        $name = str_replace('__', '%2F', $name);
+
         $response = $this->client->get("$platform/$name", [
                 'query' => [
                     'api_key' => $this->apiKey
@@ -43,8 +44,8 @@ class LibrariesIoApi
             ]
         );
 
-        $query = $response->getRequestTarget();
-        echo "Query: $query\n";
+//        $query = $response->getRequestTarget();
+//        echo "Query: $query\n";
 
 
 

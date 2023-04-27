@@ -30,9 +30,7 @@
                     <td>{{ result.name }}</td>
                     <td>{{ result.repository_url }}</td>
                     {% set platformToLower = result.platform|lower  %}
-                    {% set nameToLower = result.name|replace({'/': '%2F'}) %}
-{#                    <td><a href="{{ path('package_details', {'platform': result.platform, 'name': result.name|e}) }}">Details</a></td>#}
-{#                    <td><a href="{{ path('package_details', {'platform': platformToLower, 'name': nameToLower}) }}">Details</a></td>#}
+                    {% set nameToLower = result.name|replace({'/': '__'}) %}
                     <td><a href="{{ path('package_details', {'platform': platformToLower, 'name': nameToLower}) }}">Details</a></td>
                     <td><input type="checkbox" class="select-package" data-name="{{ result.name }}" data-url="{{ result.repository_url }}"></td>
                 </tr>

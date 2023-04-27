@@ -11,21 +11,20 @@ use Symfony\Component\Serializer\Encoder\JsonEncode;
 class PackageController extends AbstractController
 {
     /**
-     * @Route("/package/{platform}/{name<[^/]+>}", name="package_details", methods={"GET"})
+     * @Route("/package/{platform}/{name}", name="package_details", methods={"GET"})
      */
     public function showPackage($platform, $name, LibrariesIoApi $librariesIoApi)
     {
         $apiKey = $this->getParameter('libraries_io_api_key');
         $platform = strtolower(filter_var($platform, FILTER_SANITIZE_STRING));
-//        $name = str_replace('/', '_', urldecode(filter_var($name, FILTER_SANITIZE_STRING)));
+        $name = filter_var($name, FILTER_SANITIZE_STRING);
 
         $result = $librariesIoApi->getPackageDetails($platform, $name);
-
+dump($result);
         return $this->render('package/index.html.twig', [
             'package' => $result,
+            'controller_name' => 'Package Controller',
         ]);
-        //        return $this->json($result);
-//        return $this->render('package/index.html.twig');
     }
 
     /**

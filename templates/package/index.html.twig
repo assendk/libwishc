@@ -9,12 +9,25 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div>
+        <a href="javascript:history.back()">Back to previous page</a>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/html/libwishc/src/Controller/PackageController.php'|file_link(0) }}">src/Controller/PackageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/html/libwishc/templates/package/index.html.twig'|file_link(0) }}">templates/package/index.html.twig</a></code></li>
-    </ul>
+    <h1>Package name:  <b>{{ package.name }}</b> ✅</h1>
+    <h3>Release: {{ package.latest_release_number }}</h3>
+    <p>{{ package.description }}</p>
+    <p>Home: <a href="{{ package.homepage }}">{{ package.homepage }}</a></p>
+    <p>Repository: <a href="{{ package.repository_url }}">{{ package.repository_url }}</a></p>
+    <p>Platform: {{ package.platform }}</p>
+
+
+
+    <div class="row card p-2">
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a href="{{ '/var/www/html/libwishc/src/Controller/PackageController.php'|file_link(0) }}">src/Controller/PackageController.php</a></code></li>
+            <li>Your template at <code><a href="{{ '/var/www/html/libwishc/templates/package/index.html.twig'|file_link(0) }}">templates/package/index.html.twig</a></code></li>
+        </ul>
+    </div>
 </div>
 {% endblock %}
